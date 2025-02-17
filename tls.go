@@ -7,9 +7,9 @@ import (
 	"crypto/x509"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"os"
 
-	pb "github.com/hazaelsan/ssh-relay/proto/v1/tls_go_proto"
+	pb "github.com/hazaelsan/go-tls/proto/v1/tls"
 )
 
 const (
@@ -87,7 +87,7 @@ func loadCerts(certs []string) (*x509.CertPool, error) {
 	}
 	pool := x509.NewCertPool()
 	for _, f := range certs {
-		b, err := ioutil.ReadFile(f)
+		b, err := os.ReadFile(f)
 		if err != nil {
 			return nil, fmt.Errorf("ReadFile(%v) error: %w", f, err)
 		}

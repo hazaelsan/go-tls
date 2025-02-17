@@ -11,7 +11,7 @@ import (
 
 	"github.com/kylelemons/godebug/pretty"
 
-	pb "github.com/hazaelsan/ssh-relay/proto/v1/tls_go_proto"
+	pb "github.com/hazaelsan/go-tls/proto/v1/tls"
 )
 
 func subjectCN(b []byte) (string, error) {

@@ -2,12 +2,12 @@ syntax = "proto3";
 
 import "google/api/field_behavior.proto";
 
-package hazaelsan.ssh_relay.v1;
+package hazaelsan.tls.v1;
 
 option java_package = "net.hazael.gotls.v1";
 option java_outer_classname = "TlsProto";
 option java_multiple_files = true;
-option go_package = "github.com/hazaelsan/ssh-relay/proto/v1/tls_go_proto";
+option go_package = "github.com/hazaelsan/go-tls/proto/v1/tls";
 
 // Generic configuration options for Go TLS clients/servers, see
 // https://golang.org/pkg/crypto/tls/#Config.
