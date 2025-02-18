@@ -6,8 +6,10 @@ package(default_visibility = ["//visibility:public"])
 # gazelle:prefix github.com/hazaelsan/go-tls
 # gazelle:proto package
 # gazelle:proto_group go_package
+# gazelle:resolve go github.com/hazaelsan/go-tls/proto/v1/tls //proto/v1:tls_go_proto
 # gazelle:resolve proto google/api/field_behavior.proto @googleapis//google/api:field_behavior_proto
 # gazelle:resolve proto go google/api/field_behavior.proto @googleapis//google/api:annotations_go_proto
+# gazelle:exclude empty.go
 gazelle(name = "gazelle")
 
 go_library(
