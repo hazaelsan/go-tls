@@ -103,6 +103,7 @@ http_archive(
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 load("//:repositories.bzl", "go_repositories")
 
+# gazelle:repository_macro repositories.bzl%go_repositories
 go_repositories()
 
 gazelle_dependencies(go_sdk = "go_sdk")
