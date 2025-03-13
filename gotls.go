@@ -1,6 +1,6 @@
 // Package tls provides helpers around the crypto/tls package.
 // Configuration is done via protobuf messages.
-package tls
+package gotls
 
 import (
 	"crypto/tls"
@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"os"
 
-	pb "github.com/hazaelsan/go-tls/proto/v1/tls"
+	pb "github.com/hazaelsan/gotls/proto/v1/tls"
 )
 
 const (

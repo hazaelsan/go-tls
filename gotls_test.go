@@ -1,4 +1,4 @@
-package tls
+package gotls
 
 import (
 	"crypto/tls"
@@ -11,7 +11,7 @@ import (
 
 	"github.com/kylelemons/godebug/pretty"
 
-	pb "github.com/hazaelsan/go-tls/proto/v1/tls"
+	pb "github.com/hazaelsan/gotls/proto/v1/tls"
 )
 
 func subjectCN(b []byte) (string, error) {

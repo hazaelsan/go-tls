@@ -11,17 +11,17 @@ package(default_visibility = ["//visibility:public"])
 gazelle(name = "gazelle")
 
 go_library(
-    name = "go-tls",
-    srcs = ["tls.go"],
-    importpath = "github.com/hazaelsan/go-tls",
+    name = "gotls",
+    srcs = ["gotls.go"],
+    importpath = "github.com/hazaelsan/gotls",
     deps = ["//proto/v1:tls_go_proto"],
 )
 
 go_test(
-    name = "go-tls_test",
-    srcs = ["tls_test.go"],
+    name = "gotls_test",
+    srcs = ["gotls_test.go"],
     data = ["testdata"],
-    embed = [":go-tls"],
+    embed = [":gotls"],
     deps = [
         "//proto/v1:tls_go_proto",
         "@com_github_kylelemons_godebug//pretty",

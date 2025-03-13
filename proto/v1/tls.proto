@@ -4,10 +4,10 @@ import "google/api/field_behavior.proto";
 
 package hazaelsan.tls.v1;
 
-option java_package = "net.hazael.gotls.v1";
+option java_package = "net.hazael.tls.v1";
 option java_outer_classname = "TlsProto";
 option java_multiple_files = true;
-option go_package = "github.com/hazaelsan/go-tls/proto/v1/tls";
+option go_package = "github.com/hazaelsan/gotls/proto/v1/tls";
 
 // Generic configuration options for Go TLS clients/servers, see
 // https://golang.org/pkg/crypto/tls/#Config.

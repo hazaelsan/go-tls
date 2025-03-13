@@ -1,2 +1,4 @@
+github.com/hazaelsan/go-tls v1.1.1 h1:Tk9oe41edmmbvW9T+rLi+2zFB+dCaqNX7ePFlcIlxlE=
+github.com/hazaelsan/go-tls v1.1.1/go.mod h1:oTJU34kqBq00es3v/7NyJyJdAteYCOe5CNtqzMKdVPQ=
 github.com/kylelemons/godebug v1.1.0 h1:RPNrshWIDI6G2gRW9EHilWtl7Z6Sb1BR0xunSBf0SNc=
 github.com/kylelemons/godebug v1.1.0/go.mod h1:9/0rRGxNHcop5bhtWyNeEfOS8JIWk580+fNqagV/RAw=

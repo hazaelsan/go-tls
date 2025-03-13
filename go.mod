@@ -1,4 +1,4 @@
-module github.com/hazaelsan/go-tls
+module github.com/hazaelsan/gotls
 
 go 1.22.7
 

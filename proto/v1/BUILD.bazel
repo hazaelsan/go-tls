@@ -11,7 +11,7 @@ proto_library(
 
 go_proto_library(
     name = "tls_go_proto",
-    importpath = "github.com/hazaelsan/go-tls/proto/v1/tls",
+    importpath = "github.com/hazaelsan/gotls/proto/v1/tls",
     proto = ":tls_proto",
     deps = ["@com_google_googleapis//google/api:annotations_go_proto"],
 )
