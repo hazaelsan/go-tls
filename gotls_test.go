@@ -11,7 +11,7 @@ import (
 
 	"github.com/kylelemons/godebug/pretty"
 
-	pb "github.com/hazaelsan/gotls/proto/v1/tls"
+	"github.com/hazaelsan/gotls/proto/v1/tlspb"
 )
 
 func subjectCN(b []byte) (string, error) {
@@ -25,7 +25,7 @@ func subjectCN(b []byte) (string, error) {
 func TestConfig(t *testing.T) {
 	tests := []struct {
 		name      string
-		cfg       *pb.TlsConfig
+		cfg       *tlspb.TlsConfig
 		want      *tls.Config
 		rootCNs   []string
 		clientCNs []string
@@ -33,7 +33,7 @@ func TestConfig(t *testing.T) {
 	}{
 		{
 			name: "good empty tls config",
-			cfg:  new(pb.TlsConfig),
+			cfg:  new(tlspb.TlsConfig),
 			want: &tls.Config{
 				ClientAuth: tls.RequireAndVerifyClientCert,
 				MinVersion: tls.VersionTLS12,
@@ -42,8 +42,8 @@ func TestConfig(t *testing.T) {
 		},
 		{
 			name: "good require_any_client_cert",
-			cfg: &pb.TlsConfig{
-				ClientAuthType: pb.TlsConfig_REQUIRE_ANY_CLIENT_CERT,
+			cfg: &tlspb.TlsConfig{
+				ClientAuthType: tlspb.TlsConfig_REQUIRE_ANY_CLIENT_CERT,
 			},
 			want: &tls.Config{
 				ClientAuth: tls.RequireAnyClientCert,
@@ -53,8 +53,8 @@ func TestConfig(t *testing.T) {
 		},
 		{
 			name: "good require_and_verify_client_cert",
-			cfg: &pb.TlsConfig{
-				ClientAuthType: pb.TlsConfig_REQUIRE_AND_VERIFY_CLIENT_CERT,
+			cfg: &tlspb.TlsConfig{
+				ClientAuthType: tlspb.TlsConfig_REQUIRE_AND_VERIFY_CLIENT_CERT,
 				RootCaCerts:    []string{"testdata/test.crt"},
 			},
 			want: &tls.Config{
@@ -68,7 +68,7 @@ func TestConfig(t *testing.T) {
 		},
 		{
 			name: "good client ca certs",
-			cfg: &pb.TlsConfig{
+			cfg: &tlspb.TlsConfig{
 				ClientCaCerts: []string{"testdata/test.crt"},
 			},
 			want: &tls.Config{
@@ -82,19 +82,19 @@ func TestConfig(t *testing.T) {
 		},
 		{
 			name: "bad client ca certs",
-			cfg: &pb.TlsConfig{
+			cfg: &tlspb.TlsConfig{
 				ClientCaCerts: []string{"invalid.crt"},
 			},
 		},
 		{
 			name: "bad root ca certs",
-			cfg: &pb.TlsConfig{
+			cfg: &tlspb.TlsConfig{
 				RootCaCerts: []string{"invalid.crt"},
 			},
 		},
 		{
 			name: "no client ca certs",
-			cfg: &pb.TlsConfig{
+			cfg: &tlspb.TlsConfig{
 				ClientCaCerts: []string{"/dev/null"},
 			},
 		},
@@ -150,7 +150,7 @@ func TestConfig(t *testing.T) {
 func TestCertConfig(t *testing.T) {
 	tests := []struct {
 		name     string
-		cfg      *pb.TlsConfig
+		cfg      *tlspb.TlsConfig
 		want     *tls.Config
 		subjects []string
 		names    []string
@@ -158,8 +158,8 @@ func TestCertConfig(t *testing.T) {
 	}{
 		{
 			name: "good",
-			cfg: &pb.TlsConfig{
-				ClientAuthType: pb.TlsConfig_REQUIRE_ANY_CLIENT_CERT,
+			cfg: &tlspb.TlsConfig{
+				ClientAuthType: tlspb.TlsConfig_REQUIRE_ANY_CLIENT_CERT,
 				CertFile:       "testdata/test.crt",
 				KeyFile:        "testdata/test.key",
 			},
@@ -174,14 +174,14 @@ func TestCertConfig(t *testing.T) {
 		},
 		{
 			name: "invalid cert",
-			cfg: &pb.TlsConfig{
+			cfg: &tlspb.TlsConfig{
 				CertFile: "invalid.crt",
 				KeyFile:  "testdata/test.key",
 			},
 		},
 		{
 			name: "no cert/key pair",
-			cfg:  new(pb.TlsConfig),
+			cfg:  new(tlspb.TlsConfig),
 		},
 	}
 	for _, tt := range tests {
@@ -234,7 +234,7 @@ func TestCertConfig_invalidClientAuthType(t *testing.T) {
 	m := clientAuthMap
 	defer func() { clientAuthMap = m }()
 	clientAuthMap = nil
-	if _, err := CertConfig(new(pb.TlsConfig)); !errors.Is(err, ErrBadClientAuthType) {
+	if _, err := CertConfig(new(tlspb.TlsConfig)); !errors.Is(err, ErrBadClientAuthType) {
 		t.Errorf("CertConfig() error = %v, want %v", err, ErrBadClientAuthType)
 	}
 }

@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"os"
 
-	pb "github.com/hazaelsan/gotls/proto/v1/tls"
+	"github.com/hazaelsan/gotls/proto/v1/tlspb"
 )
 
 const (
@@ -23,18 +23,18 @@ var (
 )
 
 var (
-	clientAuthMap = map[pb.TlsConfig_ClientAuthType]tls.ClientAuthType{
-		pb.TlsConfig_CLIENT_AUTH_TYPE_UNSPECIFIED:   tls.RequireAndVerifyClientCert,
-		pb.TlsConfig_NO_CLIENT_CERT:                 tls.NoClientCert,
-		pb.TlsConfig_REQUEST_CLIENT_CERT:            tls.RequestClientCert,
-		pb.TlsConfig_REQUIRE_ANY_CLIENT_CERT:        tls.RequireAnyClientCert,
-		pb.TlsConfig_VERIFY_CLIENT_CERT_IF_GIVEN:    tls.VerifyClientCertIfGiven,
-		pb.TlsConfig_REQUIRE_AND_VERIFY_CLIENT_CERT: tls.RequireAndVerifyClientCert,
+	clientAuthMap = map[tlspb.TlsConfig_ClientAuthType]tls.ClientAuthType{
+		tlspb.TlsConfig_CLIENT_AUTH_TYPE_UNSPECIFIED:   tls.RequireAndVerifyClientCert,
+		tlspb.TlsConfig_NO_CLIENT_CERT:                 tls.NoClientCert,
+		tlspb.TlsConfig_REQUEST_CLIENT_CERT:            tls.RequestClientCert,
+		tlspb.TlsConfig_REQUIRE_ANY_CLIENT_CERT:        tls.RequireAnyClientCert,
+		tlspb.TlsConfig_VERIFY_CLIENT_CERT_IF_GIVEN:    tls.VerifyClientCertIfGiven,
+		tlspb.TlsConfig_REQUIRE_AND_VERIFY_CLIENT_CERT: tls.RequireAndVerifyClientCert,
 	}
 )
 
 // ClientAuthType converts a proto ClientAuthType to its tls package equivalent.
-func ClientAuthType(t pb.TlsConfig_ClientAuthType) (tls.ClientAuthType, error) {
+func ClientAuthType(t tlspb.TlsConfig_ClientAuthType) (tls.ClientAuthType, error) {
 	if val, ok := clientAuthMap[t]; ok {
 		return val, nil
 	}
@@ -42,7 +42,7 @@ func ClientAuthType(t pb.TlsConfig_ClientAuthType) (tls.ClientAuthType, error) {
 }
 
 // Config creates a *tls.Config directive from a proto message.
-func Config(cfg *pb.TlsConfig) (*tls.Config, error) {
+func Config(cfg *tlspb.TlsConfig) (*tls.Config, error) {
 	cat, err := ClientAuthType(cfg.ClientAuthType)
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ func Config(cfg *pb.TlsConfig) (*tls.Config, error) {
 
 // CertConfig creates a *tls.Config directive from a proto message,
 // loading an X.509 certificate from the cert/key files specified.
-func CertConfig(cfg *pb.TlsConfig) (*tls.Config, error) {
+func CertConfig(cfg *tlspb.TlsConfig) (*tls.Config, error) {
 	c, err := Config(cfg)
 	if err != nil {
 		return nil, err

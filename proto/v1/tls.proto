@@ -7,7 +7,7 @@ package hazaelsan.tls.v1;
 option java_package = "net.hazael.tls.v1";
 option java_outer_classname = "TlsProto";
 option java_multiple_files = true;
-option go_package = "github.com/hazaelsan/gotls/proto/v1/tls";
+option go_package = "github.com/hazaelsan/gotls/proto/v1/tlspb";
 
 // Generic configuration options for Go TLS clients/servers, see
 // https://golang.org/pkg/crypto/tls/#Config.
