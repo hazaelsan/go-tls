@@ -14,6 +14,19 @@ load("@bazel_features//:deps.bzl", "bazel_features_deps")
 bazel_features_deps()
 
 http_archive(
+    name = "bazel_skylib",
+    sha256 = "bc283cdfcd526a52c3201279cda4bc298652efa898b10b4db0837dc51652756f",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.7.1/bazel-skylib-1.7.1.tar.gz",
+        "https://github.com/bazelbuild/bazel-skylib/releases/download/1.7.1/bazel-skylib-1.7.1.tar.gz",
+    ],
+)
+
+load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
+
+bazel_skylib_workspace()
+
+http_archive(
     name = "rules_python",
     sha256 = "2ef40fdcd797e07f0b6abda446d1d84e2d9570d234fddf8fcd2aa262da852d1c",
     strip_prefix = "rules_python-1.2.0",
@@ -32,7 +45,7 @@ http_archive(
 )
 
 http_archive(
-    name = "googleapis",
+    name = "com_google_googleapis",
     sha256 = "e8e43dd32e538ff772c46effb7c7833db680da235b2eaf2acc0a72480638a8ff",
     strip_prefix = "googleapis-e6136c12212ca0c8b4a8867a87cf51a3decf6e53",
     urls = [
@@ -40,24 +53,12 @@ http_archive(
     ],
 )
 
-load("@googleapis//:repository_rules.bzl", "switched_rules_by_language")
+load("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_language")
 
 switched_rules_by_language(
     name = "com_google_googleapis_imports",
+    go = True,
 )
-
-http_archive(
-    name = "bazel_skylib",
-    sha256 = "bc283cdfcd526a52c3201279cda4bc298652efa898b10b4db0837dc51652756f",
-    urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.7.1/bazel-skylib-1.7.1.tar.gz",
-        "https://github.com/bazelbuild/bazel-skylib/releases/download/1.7.1/bazel-skylib-1.7.1.tar.gz",
-    ],
-)
-
-load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
-
-bazel_skylib_workspace()
 
 http_archive(
     name = "rules_proto",
@@ -89,7 +90,7 @@ load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_depe
 
 go_rules_dependencies()
 
-go_register_toolchains(version = "1.24.0")
+go_register_toolchains(version = "1.22.7")
 
 http_archive(
     name = "bazel_gazelle",
